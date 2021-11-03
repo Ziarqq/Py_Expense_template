@@ -2,12 +2,12 @@ from PyInquirer import prompt
 import csv
 
 def get_status():
-    expenses = []
+    status = []
     with open('status.csv', 'r') as status_file:
         reader = csv.reader(status_file)
         for row in reader:
-            expenses.append(row[0])
-    return expenses
+            status.append(row[0])
+    return status
 
 def add_expense_to_status(infos):
     total = infos["amount"]
