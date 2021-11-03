@@ -39,4 +39,5 @@ Exemple: 3 Users :
 - [ ] All implemented features should have relevant test cases
     - If I just have to run your test suite to check project quality and features : Automatic bonus
 - [ ] Bonus : Improve your app in any way you want : More features, fancy report, any good idea will be rewarded
+- [X] Bonus : Implemented the exit button
 

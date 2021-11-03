@@ -3,13 +3,14 @@ from examples import custom_style_2
 from expense import expense_questions,new_expense
 from user import add_user
 from status import display_status
+import sys
 
 def ask_option():
     main_option = {
         "type":"list",
         "name":"main_options",
         "message":"Expense Tracker v0.1",
-        "choices": ["New Expense","Show Status","New User"]
+        "choices": ["New Expense","Show Status","New User", "Quit"]
     }
     option = prompt(main_option)
     if (option['main_options']) == "New Expense":
@@ -19,6 +20,8 @@ def ask_option():
         add_user()
     if (option['main_options']) == "Show Status":
         display_status()
+    if (option['main_options']) == "Quit":
+        sys.exit()
 
 
 def main():
