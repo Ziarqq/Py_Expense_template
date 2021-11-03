@@ -1,4 +1,31 @@
 from PyInquirer import prompt
+import csv
+from status import add_expense_to_status
+
+def get_user_list(answers):
+    user_list = []
+    with open('users.csv', 'r') as users:
+        reader = csv.reader(users)
+        for row in reader:
+            user_list.append(row[0])
+    return user_list
+
+def get_involved_list(answers):
+    involved_list = []
+    user_list = []
+    with open('users.csv', 'r') as users:
+        reader = csv.reader(users)
+        for row in reader:
+            user_list.append(row[0])
+    
+    for user in user_list:
+        if user == answers["spender"]:
+            involved_list.append({'name':user, 'checked':True})
+        else:
+            involved_list.append({'name':user})
+
+    return involved_list
+
 
 expense_questions = [
     {
@@ -12,18 +39,28 @@ expense_questions = [
         "message":"New Expense - Label: ",
     },
     {
-        "type":"input",
+        "type":"list",
         "name":"spender",
         "message":"New Expense - Spender: ",
+        "choices": get_user_list,
     },
-
+    {
+        "type":"checkbox",
+        "name":"involved",
+        "message":"New Expense - Involved people: ",
+        "choices": get_involved_list,
+    },
 ]
-
-
-
 def new_expense(*args):
     infos = prompt(expense_questions)
+
     # Writing the informations on external file might be a good idea ¯\_(ツ)_/¯
+    with open('expense_report.csv', 'a') as expenses:
+        writer = csv.writer(expenses)
+        writer.writerow('')
+        writer.writerow([infos["amount"]] + [infos["label"]] + [infos["spender"]])
+    
+    add_expense_to_status(infos)
     print("Expense Added !")
     return True
 
