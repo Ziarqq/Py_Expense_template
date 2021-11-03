@@ -1,7 +1,7 @@
 from PyInquirer import prompt
 import csv
 
-def get_expenses():
+def get_status():
     expenses = []
     with open('status.csv', 'r') as status_file:
         reader = csv.reader(status_file)
@@ -27,6 +27,7 @@ def add_expense_to_status(infos):
         writer = csv.writer(status_file)
         writer.writerows(report)
 
-def display_expenses():
-    expenses = get_expenses()
-    print(expenses)
+def display_status():
+    status = get_status()
+    for line in status:
+        print(line)

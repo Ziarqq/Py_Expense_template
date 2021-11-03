@@ -1,6 +1,7 @@
 from PyInquirer import prompt
-import csv
 from status import add_expense_to_status
+from checks import NumberValidator, StringValidator
+import csv
 
 def get_user_list(answers):
     user_list = []
@@ -32,11 +33,13 @@ expense_questions = [
         "type":"input",
         "name":"amount",
         "message":"New Expense - Amount: ",
+        "validate": NumberValidator,
     },
     {
         "type":"input",
         "name":"label",
         "message":"New Expense - Label: ",
+        "validate": StringValidator,
     },
     {
         "type":"list",
